@@ -7,7 +7,7 @@ import Video from './components/Video/Video';
 import YoutubeSearch from 'youtube-api-search';
 import './App.css';
 
-const YOUTUBE_API_KEY = 'AIzaSyBB8QIRVNhhsnuo7ApTVQ4cgmzjj8E4zeg'
+const YOUTUBE_API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
 
 export default class App extends React.Component {
   state = { videos: [] }
