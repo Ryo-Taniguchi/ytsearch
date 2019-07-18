@@ -6,6 +6,7 @@ export default class Header extends React.Component {
 
     handleChangeInput = (e) => {
         this.setState({keyword: e.target.value})
+        this.props.searchWord(e.target.value);
     }
 
     render() {
