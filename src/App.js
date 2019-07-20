@@ -12,13 +12,17 @@ export default class App extends React.Component {
   state = { 
     videos: [],
     selected: null,
-    searchWord: null,
   }
 
-  componentDidMount() {
-    const url = 'https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=&maxResults=10&key=';
+  onClickVideoHandker = (video) => {
+    this.setState({ selected: video});
+  }
+
+  onSearchVideo = (value) => {
+    console.log(value);
+    const url = `https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${value}&maxResults=10&key=${YOUTUBE_API_KEY}`;
     axios
-      .get( url + YOUTUBE_API_KEY)
+      .get(url)
       .then(response => {
           this.setState({
             videos: response.data.items,
@@ -30,16 +34,7 @@ export default class App extends React.Component {
       });
   }
 
-  onClickVideoHandker = (video) => {
-    this.setState({ selected: video});
-  }
-
-  onSearchVideo = (value) => {
-    this.setState({searchWord: value});
-  }
-
   render() {
-    console.log(this.state.videos);
     return (
       <div className="App">
         <Header searchWord={this.onSearchVideo}/>

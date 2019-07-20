@@ -1,13 +1,18 @@
 import React from 'react';
+import _ from 'lodash';
 
 export default class Header extends React.Component {
 
     state = {keyword: ''};
-
+    
     handleChangeInput = (e) => {
-        this.setState({keyword: e.target.value})
-        this.props.searchWord(e.target.value);
+        this.setState({keyword: e.target.value});
+        this.debounceSearchWord(e.target.value)
     }
+
+    debounceSearchWord = _.debounce(value => {
+        this.props.searchWord(value);
+    },500);
 
     render() {
         const fontStyle = {
@@ -20,7 +25,11 @@ export default class Header extends React.Component {
                     <h2 style={fontStyle}>Youtube</h2>
                 </div>
                 <div>
-                    <input onChange={this.handleChangeInput} value={this.state.keyword}/>
+                    <input 
+                      className="mb-3" 
+                      onChange={this.handleChangeInput}
+                      value={this.state.keyword}
+                    />
                 </div>
             </div>
         )

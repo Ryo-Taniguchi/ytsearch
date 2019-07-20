@@ -4,7 +4,7 @@ import Item from '../Item/Item';
 const List = (props) => {
 
     const Items = props.videos.map((video) => {
-        if(props.selectedVideo != video) {
+        if(props.selectedVideo !== video) {
             return (
                 <Item 
                   video={video} key={video.id.videoId}
@@ -12,8 +12,9 @@ const List = (props) => {
                   onVideoClicked={props.onClickVideoHandker}
                 />
             )
-        }
-    });
+        };
+        return false;
+    }); 
 
     return (
         <ul className="col-md-4 list-group">
